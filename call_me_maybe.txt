@@ -1,3 +1,15 @@
+:- initialization(hanoi(5)).
+hanoi(N) :- move(N,left,center,right).
+move(0,_,_,_) :- !.
+move(N,A,B,C) :- M is N -1,
+        move(M,A,C,B),
+        inform(A,B),
+        move(M,C,B,A).
+inform(X,Y) :- write([move,disco,de,X,para,Y]),
+        nl.
+
+
+
 :- initialization(shall_pass(souza, go)).
 
 esq(go, sp, 0).
@@ -49,12 +61,15 @@ esq(duque, es, 2).
 esq(duque, go, 1).
 esq(duque, pa, 0).
 
+equal(A,B) :- A = B.
+
+shall_pass(INI_X, INI_Y, FIM_X, FIM_Y) :- INI_X = FIM_X, INI_Y = FIM_Y, write('ahaaa').
 shall_pass(INI_X, INI_Y, FIM_X, FIM_Y) :- 
-        esq(INI_X, INI_Y, DIST_X),
-        esq(INI_X, NEXT_X, NEXT_DIST_X), NEXT_DIST_X > DIST_X, 
+        esq(INI_X, INI_Y, DIST_X), NEXT_DIST_X is DIST_X + 1,
+        esq(INI_X, NEXT_X, NEXT_DIST_X), 
         write(NEXT_X), nl,
-        esq(INI_Y, INI_X, DIST_Y), 
-        esq(INI_Y, NEXT_Y, NEXT_DIST_Y), NEXT_DIST_Y > DIST_Y, 
+        esq(INI_Y, INI_X, DIST_Y), NEXT_DIST_Y is DIST_Y + 1,
+        esq(INI_Y, NEXT_Y, NEXT_DIST_Y), 
         write(NEXT_Y).
 
 
