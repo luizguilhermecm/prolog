@@ -1,0 +1,43 @@
+:- initialization(iam(go,ms)).
+ 
+dir(al, 1).
+dir(es, 0).
+dir(go, 1).
+dir(pa, 0).
+
+dir(duque, 1).
+dir(mt, 0).
+dir(souza, 1).
+dir(rj, 0).
+dir(sp, 1).
+
+
+esq(go, sp, 0).
+esq(go, rj, 0).
+esq(go, souza, 0)
+esq(go, duque, 1).
+
+esq(go, [sp,rj,souza,ms,duque]).
+esq(es, [sp,rj,souza,ms,duque]).
+esq(al, [sp,rj,souza,ms,duque]).
+esq(pa, [sp,rj,souza,ms,duque]).
+
+esq(sp, [go, es, al, pa]).
+esq(rs, [go, es, al, pa]).
+esq(souza, [go, es, al, pa]).
+esq(ms, [go, es, al, pa]).
+esq(duque, [go, es, al, pa]).
+
+list_esq(A) :- esq(A,B), dir().
+
+iam(X,Y,W,Z) :- iam(X,Y,X,Y), write('chegou').
+                
+
+
+
+dist(go,mt,sp,3).
+dist(go,mt,sp,3).
+dist(go,mt,sp,3).
+dist(go,mt,sp,3).
+dist(go,mt,sp,3).
+
