@@ -63,14 +63,28 @@ esq(duque, pa, 0).
 
 equal(A,B) :- A = B.
 
-shall_pass(INI_X, INI_Y, FIM_X, FIM_Y) :- INI_X = FIM_X, INI_Y = FIM_Y, write('ahaaa').
+inform(P,X,Y) :- write([P,vai,para,Y,pela,X]), nl.
+inform(P,X,_) :- write([P,vai,para,bulhufas,pela,X]), nl.
+
+shall_pass(INI_X, INI_Y, FIM_X, FIM_Y) :- (INI_X = FIM_X, INI_Y = FIM_Y) ; 
+                                        (INI_Y = FIM_X, INI_X = FIM_Y), write('done').
+
 shall_pass(INI_X, INI_Y, FIM_X, FIM_Y) :- 
-        esq(INI_X, INI_Y, DIST_X), NEXT_DIST_X is DIST_X + 1,
+        (esq(INI_X, INI_Y, DIST_X), NEXT_DIST_X is DIST_X + 1,
         esq(INI_X, NEXT_X, NEXT_DIST_X), 
-        write(NEXT_X), nl,
-        esq(INI_Y, INI_X, DIST_Y), NEXT_DIST_Y is DIST_Y + 1,
+        write([INI_X, INI_Y,to,INI_X, NEXT_X]),nl,
+        shall_pass(INI_X, NEXT_X, FIM_X, FIM_Y))
+        ;
+        (esq(INI_Y, INI_X, DIST_Y), NEXT_DIST_Y is DIST_Y + 1,
         esq(INI_Y, NEXT_Y, NEXT_DIST_Y), 
-        write(NEXT_Y).
+        write([INI_Y, INI_X,to,INI_Y, NEXT_Y]),nl,
+        shall_pass(INI_Y, NEXT_Y, FIM_X, FIM_Y)).
+
+
+
+
+
+
 
 
 
