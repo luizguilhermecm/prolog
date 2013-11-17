@@ -1,16 +1,4 @@
-:- initialization(hanoi(5)).
-hanoi(N) :- move(N,left,center,right).
-move(0,_,_,_) :- !.
-move(N,A,B,C) :- M is N -1,
-        move(M,A,C,B),
-        inform(A,B),
-        move(M,C,B,A).
-inform(X,Y) :- write([move,disco,de,X,para,Y]),
-        nl.
-
-
-
-:- initialization(shall_pass(souza, go)).
+:- initialization(shall_pass(mt, go, sp,pa)).
 
 esq(go, sp, 0).
 esq(go, rj, 1).
