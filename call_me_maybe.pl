@@ -1,0 +1,98 @@
+:- initialization(shall_pass(mt, go, pa, sp)).
+
+esq(go, sp, 0).
+esq(go, rj, 1).
+esq(go, souza, 2).
+esq(go, mt, 3).
+esq(go, duque, 4).
+
+esq(pa, sp, 4).
+esq(pa, rj, 3).
+esq(pa, souza, 2).
+esq(pa, mt, 1).
+esq(pa, duque, 0).
+
+esq(al, sp, 0).
+esq(al, rj, 1).
+esq(al, souza, 2).
+esq(al, mt, 3).
+esq(al, duque, 4).
+
+esq(es, sp, 4).
+esq(es, rj, 3).
+esq(es, souza, 2).
+esq(es, mt, 1).
+esq(es, duque, 0).
+
+esq(sp, al, 3).
+esq(sp, es, 2).
+esq(sp, go, 1).
+esq(sp, pa, 0).
+
+esq(rj, al, 0).
+esq(rj, es, 1).
+esq(rj, go, 2).
+esq(rj, pa, 3).
+
+esq(souza, al, 3).
+esq(souza, es, 2).
+esq(souza, go, 1).
+esq(souza, pa, 0).
+
+esq(mt, al, 0).
+esq(mt, es, 1).
+esq(mt, go, 2).
+esq(mt, pa, 3).
+
+esq(duque, al, 3).
+esq(duque, es, 2).
+esq(duque, go, 1).
+esq(duque, pa, 0).
+
+equal(A,B) :- A = B.
+
+ahead(X, Y, Z, P, W) :-
+        findall(A, esq(X, A, D), L),
+        member(Z, L),
+        esq(X, Z, B), B > W, write('ahead').
+
+
+
+inform(P,X,Y) :- write([P,vai,para,Y,pela,X]), nl.
+inform(P,X,_) :- write([P,vai,para,bulhufas,pela,X]), nl.
+
+turn(X, Y, Z, W, V) :-
+        findall(K, esq(X, K, D > V), L),
+        (member(Z, L)) ; (member(W, L)).
+
+shall_pass(INI_X, INI_Y, FIM_X, FIM_Y) :- (INI_X = FIM_X, INI_Y = FIM_Y) ; 
+                                        (INI_Y = FIM_X, INI_X = FIM_Y), write('done').
+
+shall_pass(INI_X, INI_Y, FIM_X, FIM_Y) :- 
+        (
+                esq(INI_X, INI_Y, DIST_X), 
+                NEXT_DIST_X is DIST_X + 1,
+                ahead(INI_X, INI_Y, FIM_X, FIM_Y, DIST_X),
+                esq(INI_X, NEXT_X, NEXT_DIST_X), 
+                write([INI_X, INI_Y,to,INI_X, NEXT_X]),nl,
+                shall_pass(INI_X, NEXT_X, FIM_X, FIM_Y)
+        )
+        ;
+        (
+                esq(INI_Y, INI_X, DIST_Y), 
+                NEXT_DIST_Y is DIST_Y + 1,
+                esq(INI_Y, NEXT_Y, NEXT_DIST_Y), 
+                write([INI_Y, INI_X,to,INI_Y, NEXT_Y]),nl,
+                shall_pass(INI_Y, NEXT_Y, FIM_X, FIM_Y)
+        )
+        ;
+        (
+                esq(INI_X, INI_Y, DIST_X), 
+                NEXT_DIST_X is DIST_X + 1,
+                ahead(INI_X, INI_Y, FIM_X, FIM_Y, DIST_X),
+                esq(INI_X, NEXT_X, NEXT_DIST_X), 
+                write([INI_X, INI_Y,to,INI_X, NEXT_X]),nl,
+                shall_pass(INI_X, NEXT_X, FIM_X, FIM_Y)
+        )
+        .
+

@@ -67,12 +67,3 @@ shall_pass(INI_X, INI_Y, FIM_X, FIM_Y) :-
         esq(INI_Y, NEXT_Y, NEXT_DIST_Y), 
         write([INI_Y, INI_X,to,INI_Y, NEXT_Y]),nl,
         shall_pass(INI_Y, NEXT_Y, FIM_X, FIM_Y)).
-
-
-
-
-
-
-
-
-
