@@ -72,7 +72,6 @@ shall_pass(INI_X, INI_Y, FIM_X, FIM_Y) :-
         (
                 esq(INI_X, INI_Y, DIST_X), 
                 NEXT_DIST_X is DIST_X + 1,
-                ahead(INI_X, INI_Y, FIM_X, FIM_Y, DIST_X),
                 esq(INI_X, NEXT_X, NEXT_DIST_X), 
                 write([INI_X, INI_Y,to,INI_X, NEXT_X]),nl,
                 shall_pass(INI_X, NEXT_X, FIM_X, FIM_Y)
@@ -85,14 +84,4 @@ shall_pass(INI_X, INI_Y, FIM_X, FIM_Y) :-
                 write([INI_Y, INI_X,to,INI_Y, NEXT_Y]),nl,
                 shall_pass(INI_Y, NEXT_Y, FIM_X, FIM_Y)
         )
-        ;
-        (
-                esq(INI_X, INI_Y, DIST_X), 
-                NEXT_DIST_X is DIST_X + 1,
-                ahead(INI_X, INI_Y, FIM_X, FIM_Y, DIST_X),
-                esq(INI_X, NEXT_X, NEXT_DIST_X), 
-                write([INI_X, INI_Y,to,INI_X, NEXT_X]),nl,
-                shall_pass(INI_X, NEXT_X, FIM_X, FIM_Y)
-        )
         .
-
